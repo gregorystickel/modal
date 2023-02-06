@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/Header'
+import './App.css'
+import React, { useState } from 'react';
+import TestModal from './components/TestModal';
+import NonMaterialModal from './components/NonMaterialModal';
 
 function App() {
+  const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
+
+  const modalOpenHandler = () => {
+    setOpen2(true);
+  }
+
+  const modalCloseHandler = () => {
+    setOpen2(false);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header open={open} setOpen={setOpen} />
+      <TestModal open={open} setOpen={setOpen} />
+      <button onClick={modalOpenHandler}>Open Modal 2</button>
+      { open2 && <NonMaterialModal open2={open2} setOpen2={setOpen2} modalCloseHandler={modalCloseHandler}/>}
+      
     </div>
   );
 }
